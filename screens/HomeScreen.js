@@ -1,4 +1,5 @@
 import React from 'react';
+import Main from './Main.js'
 import {
   Image,
   Platform,
@@ -10,6 +11,7 @@ import {
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
+
 import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
@@ -20,13 +22,8 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
 
-          <View style={styles.getStartedContainer}>
-
-            <Text style={styles.getStartedText}>
-
-        hellooooo it's me
-            </Text>
-          </View>
+            <Main/>
+          
     );
   }
 }
