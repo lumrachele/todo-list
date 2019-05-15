@@ -10,15 +10,24 @@ import {
   TextInput
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import Note from './Note'
 
 import { MonoText } from '../components/StyledText';
 
 export default class Main extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
+
+  constructor(props){
+    super(props);
+    this.state = {
+      noteArray: [],
+      noteText: ''
+    }
+  }
 
   render() {
+    let notes = this.state.noteArray.map((val, key)=>{
+      return <Note key={key} keyval={key} val={val} deleteMethod={(key)=>this.deleteNote(key)}/>
+    })
     return (
           <View style={styles.container}>
 
@@ -29,18 +38,22 @@ export default class Main extends React.Component {
             </View>
 
             <ScrollView style={styles.scrollContainer}>
+              {notes}
             </ScrollView>
 
             <View style={styles.footer}>
               <TextInput style={styles.textInput}
+              onChangeText={(noteText)=>this.setState({noteText})}
+              value={this.state.noteText}
               placeholder="to do"
               placeholderTextColor='white'
               >
-
               </TextInput>
             </View>
 
-            <TouchableOpacity style={styles.addButton}>
+            <TouchableOpacity style={styles.addButton}
+            onPress={()=>this.addNote()}
+            >
               <Text style={styles.addButtonText}>
               +
               </Text>
@@ -50,6 +63,26 @@ export default class Main extends React.Component {
           </View>
 
     );
+  }
+  addNote(){
+    //
+    if(!!this.state.noteText){
+      let d = new Date()
+      // alert(d.getFullYear())
+      this.state.noteArray.push({
+      'date': d.getFullYear()+'/'+(d.getMonth()+1)+'/'+(d.getDate()),
+      'note': this.state.noteText
+      })
+      this.setState({
+        noteArray: [...this.state.noteArray],
+        noteText: ''
+      })
+    }
+  }
+
+  deleteNote(key){
+    this.state.noteArray.splice(key, 1)
+    this.setState({noteArray: this.state.noteArray})
   }
 }
 
