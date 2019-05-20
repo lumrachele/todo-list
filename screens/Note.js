@@ -16,24 +16,47 @@ export default class Note extends React.Component {
     }
   }
 
+  onSwipe(gestureName) {
+    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+    // this.setState({gestureName: gestureName});
+    // switch (gestureName) {
+    //   case SWIPE_UP:
+    //     this.setState({backgroundColor: 'red'});
+    //     break;
+    //   case SWIPE_DOWN:
+    //     this.setState({backgroundColor: 'green'});
+    //     break;
+    //   case SWIPE_LEFT:
+    //     this.setState({backgroundColor: 'blue'});
+    //     break;
+    //   case SWIPE_RIGHT:
+    //     this.setState({backgroundColor: 'yellow'});
+    //     break;
+    // }
+    console.log('You swiped', gestureName)
+  }
+
+
   render(){
     return(
-      <View key={this.props.keyval} style={styles.note}>
-        <Text style={styles.noteText}>
-        {this.props.val.date}
-        </Text>
-        <Text style={styles.noteText}>
-        {this.props.val.note}
-        </Text>
-        <CheckBox
-        title='Click Here'
-        checked={this.state.checked}
-        />
+      <GestureRecognizer
+     onSwipe={(direction) => this.onSwipe(direction)}
 
-        <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
-          <Text style={styles.noteDeleteText}>delete</Text>
-        </TouchableOpacity>
-      </View>
+     >
+        <View key={this.props.keyval} style={styles.note}>
+          <Text style={styles.noteText}>
+          {this.props.val.date}
+          </Text>
+          <Text style={styles.noteText}>
+          {this.props.val.note}
+          </Text>
+
+
+          <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
+            <Text style={styles.noteDeleteText}>delete</Text>
+          </TouchableOpacity>
+        </View>
+      </GestureRecognizer>
     )
   }
 }

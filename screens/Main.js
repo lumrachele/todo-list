@@ -10,7 +10,8 @@ import {
   TextInput
 } from 'react-native';
 // import { CheckBox } from 'react-native-elements'
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+// import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+
 import { WebBrowser } from 'expo';
 import Note from './Note'
 
@@ -26,33 +27,15 @@ export default class Main extends React.Component {
     }
   }
 
-  onSwipe(gestureName, gestureState) {
-    // const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-    // this.setState({gestureName: gestureName});
-    // switch (gestureName) {
-    //   case SWIPE_UP:
-    //     this.setState({backgroundColor: 'red'});
-    //     break;
-    //   case SWIPE_DOWN:
-    //     this.setState({backgroundColor: 'green'});
-    //     break;
-    //   case SWIPE_LEFT:
-    //     this.setState({backgroundColor: 'blue'});
-    //     break;
-    //   case SWIPE_RIGHT:
-    //     this.setState({backgroundColor: 'yellow'});
-    //     break;
-    // }
-    alert('You swiped', gestureName)
-  }
-
-
 
   render() {
     let notes = this.state.noteArray.map((val, key)=>{
       return <Note key={key} keyval={key} val={val} deleteMethod={()=>this.deleteNote(key)}/>
     })
     return (
+
+
+
           <View style={styles.container}>
 
             <View style={styles.header}>
@@ -86,6 +69,7 @@ export default class Main extends React.Component {
 
           </View>
 
+
     );
   }
   addNote(){
@@ -105,8 +89,6 @@ export default class Main extends React.Component {
   }
 
   deleteNote(key){
-    console.log(key)
-    // e
     this.state.noteArray.splice(key, 1)
     this.setState({noteArray: this.state.noteArray})
   }
@@ -166,3 +148,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
   }
 });
+
+// onSwipeUp={(state) => this.onSwipeUp(state)}
+// onSwipeDown={(state) => this.onSwipeDown(state)}
+// onSwipeLeft={(state) => this.onSwipeLeft(state)}
+// onSwipeRight={(state) => this.onSwipeRight(state)}
+// config={config}
+//
+// style={{
+//   flex: 1,
+//   backgroundColor: this.state.backgroundColor
+// }}
