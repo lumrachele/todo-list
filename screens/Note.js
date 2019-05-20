@@ -4,9 +4,18 @@ import {
   Text,
   TouchableOpacity,
   View,
+  // CheckBox
 } from 'react-native';
-
+// import { CheckBox } from 'react-native-elements'
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 export default class Note extends React.Component {
+  constructor(props){
+    super(props)
+    this.state={
+      isComplete: false
+    }
+  }
+
   render(){
     return(
       <View key={this.props.keyval} style={styles.note}>
@@ -16,6 +25,10 @@ export default class Note extends React.Component {
         <Text style={styles.noteText}>
         {this.props.val.note}
         </Text>
+        <CheckBox
+        title='Click Here'
+        checked={this.state.checked}
+        />
 
         <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
           <Text style={styles.noteDeleteText}>delete</Text>
@@ -31,7 +44,8 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingRight: 100,
     borderBottomWidth: 2,
-    borderBottomColor: '#ededed'
+    borderBottomColor: '#ededed',
+    backgroundColor: 'red'
   },
   noteText: {
     paddingLeft: 20,
