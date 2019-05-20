@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     paddingRight: 100,
     borderBottomWidth: 2,
     borderBottomColor: '#ededed',
-    backgroundColor: 'red'
+    // backgroundColor: 'red'
   },
   noteText: {
     paddingLeft: 20,
