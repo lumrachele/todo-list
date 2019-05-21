@@ -7,7 +7,9 @@ import {
   Text,
   TouchableOpacity,
   View,
-  TextInput
+  TextInput,
+  KeyboardAvoidingView,
+  Keyboard
 } from 'react-native';
 // import { CheckBox } from 'react-native-elements'
 // import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
@@ -23,9 +25,35 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       noteArray: [],
-      noteText: ''
+      noteText: '',
+      keyboardShown: false
     }
   }
+
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      this._keyboardDidShow,
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      this._keyboardDidHide,
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow() {
+    this.setState({keyboardShown: true})
+  }
+
+  _keyboardDidHide() {
+    this.setState({keyboardShown: false})
+  }
+
 
 
   render() {
@@ -33,7 +61,6 @@ export default class Main extends React.Component {
       return <Note key={key} keyval={key} val={val} deleteMethod={()=>this.deleteNote(key)}/>
     })
     return (
-
 
 
           <View style={styles.container}>
@@ -49,13 +76,15 @@ export default class Main extends React.Component {
             </ScrollView>
 
             <View style={styles.footer}>
-              <TextInput style={styles.textInput}
-              onChangeText={(noteText)=>this.setState({noteText})}
-              value={this.state.noteText}
-              placeholder="to do"
-              placeholderTextColor='white'
-              >
-              </TextInput>
+              <KeyboardAvoidingView behavior="padding" enabled>
+                <TextInput style={styles.textInput, "bottom:100"}
+                onChangeText={(noteText)=>this.setState({noteText})}
+                value={this.state.noteText}
+                placeholder="to do"
+                placeholderTextColor='white'
+                >
+                </TextInput>
+              </KeyboardAvoidingView>
             </View>
 
             <TouchableOpacity style={styles.addButton}
@@ -92,6 +121,10 @@ export default class Main extends React.Component {
     this.state.noteArray.splice(key, 1)
     this.setState({noteArray: this.state.noteArray})
   }
+
+  adjustPadding(){
+    this.state.keyboardShown ? 200:null
+  }
 }
 
 const styles = StyleSheet.create({
@@ -126,6 +159,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     color: '#fff',
     padding: 20,
+    // bottom: adjustPadding(),
     backgroundColor: '#252525',
     borderTopWidth: 5,
     borderTopColor: '#ededed',
@@ -148,6 +182,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
   }
 });
+
+
 
 // onSwipeUp={(state) => this.onSwipeUp(state)}
 // onSwipeDown={(state) => this.onSwipeDown(state)}

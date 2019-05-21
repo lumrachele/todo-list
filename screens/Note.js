@@ -33,7 +33,7 @@ export default class Note extends React.Component {
     //     this.setState({backgroundColor: 'yellow'});
     //     break;
     // }
-    console.log('You swiped', gestureName)
+    alert(`You swiped ${gestureName}`)
   }
 
 
