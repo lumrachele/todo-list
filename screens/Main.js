@@ -30,29 +30,29 @@ export default class Main extends React.Component {
     }
   }
 
-  componentDidMount() {
-    // this.keyboardDidShowListener = Keyboard.addListener(
-    //   'keyboardDidShow',
-    //   this._keyboardDidShow,
-    // );
-    // this.keyboardDidHideListener = Keyboard.addListener(
-    //   'keyboardDidHide',
-    //   this._keyboardDidHide,
-    // );
-  }
-
-  componentWillUnmount() {
-    // this.keyboardDidShowListener.remove();
-    // this.keyboardDidHideListener.remove();
-  }
-
-  _keyboardDidShow () {
-    // this.setState({keyboardShown: true})
-  }
-
-  // _keyboardDidHide() {
-  //   this.setState({keyboardShown: false})
+  // componentDidMount() {
+  //   // this.keyboardDidShowListener = Keyboard.addListener(
+  //   //   'keyboardDidShow',
+  //   //   this._keyboardDidShow,
+  //   // );
+  //   // this.keyboardDidHideListener = Keyboard.addListener(
+  //   //   'keyboardDidHide',
+  //   //   this._keyboardDidHide,
+  //   // );
   // }
+  //
+  // componentWillUnmount() {
+  //   // this.keyboardDidShowListener.remove();
+  //   // this.keyboardDidHideListener.remove();
+  // }
+  //
+  // _keyboardDidShow () {
+  //   // this.setState({keyboardShown: true})
+  // }
+  //
+  // // _keyboardDidHide() {
+  // //   this.setState({keyboardShown: false})
+  // // }
 
 
 
@@ -62,6 +62,7 @@ export default class Main extends React.Component {
     })
     return (
 
+      <KeyboardAvoidingView style={{flex:1}} behavior="padding">
 
           <View style={styles.container}>
 
@@ -75,7 +76,6 @@ export default class Main extends React.Component {
               {notes}
             </ScrollView>
 
-            <KeyboardAvoidingView behavior="padding" enabled>
             <View style={styles.footer}>
                 <TextInput style={styles.textInput}
                 onChangeText={(noteText)=>this.setState({noteText})}
@@ -85,7 +85,6 @@ export default class Main extends React.Component {
                 >
                 </TextInput>
             </View>
-            </KeyboardAvoidingView>
 
             <TouchableOpacity style={styles.addButton}
             onPress={()=>this.addNote()}
@@ -95,6 +94,7 @@ export default class Main extends React.Component {
               </Text>
             </TouchableOpacity>
           </View>
+        </KeyboardAvoidingView>
 
 
     );
@@ -119,10 +119,10 @@ export default class Main extends React.Component {
     this.state.noteArray.splice(key, 1)
     this.setState({noteArray: this.state.noteArray})
   }
-
-  adjustPadding(){
-    this.state.keyboardShown ? 200:null
-  }
+  //
+  // adjustPadding(){
+  //   this.state.keyboardShown ? 200:null
+  // }
 }
 
 const styles = StyleSheet.create({
