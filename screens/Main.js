@@ -31,28 +31,28 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    this.keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      this._keyboardDidShow,
-    );
-    this.keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      this._keyboardDidHide,
-    );
+    // this.keyboardDidShowListener = Keyboard.addListener(
+    //   'keyboardDidShow',
+    //   this._keyboardDidShow,
+    // );
+    // this.keyboardDidHideListener = Keyboard.addListener(
+    //   'keyboardDidHide',
+    //   this._keyboardDidHide,
+    // );
   }
 
   componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
+    // this.keyboardDidShowListener.remove();
+    // this.keyboardDidHideListener.remove();
   }
 
-  _keyboardDidShow() {
-    this.setState({keyboardShown: true})
+  _keyboardDidShow () {
+    // this.setState({keyboardShown: true})
   }
 
-  _keyboardDidHide() {
-    this.setState({keyboardShown: false})
-  }
+  // _keyboardDidHide() {
+  //   this.setState({keyboardShown: false})
+  // }
 
 
 
@@ -75,17 +75,17 @@ export default class Main extends React.Component {
               {notes}
             </ScrollView>
 
+            <KeyboardAvoidingView behavior="padding" enabled>
             <View style={styles.footer}>
-              <KeyboardAvoidingView behavior="padding" enabled>
-                <TextInput style={styles.textInput, "bottom:100"}
+                <TextInput style={styles.textInput}
                 onChangeText={(noteText)=>this.setState({noteText})}
                 value={this.state.noteText}
                 placeholder="to do"
                 placeholderTextColor='white'
                 >
                 </TextInput>
-              </KeyboardAvoidingView>
             </View>
+            </KeyboardAvoidingView>
 
             <TouchableOpacity style={styles.addButton}
             onPress={()=>this.addNote()}
@@ -94,8 +94,6 @@ export default class Main extends React.Component {
               +
               </Text>
             </TouchableOpacity>
-
-
           </View>
 
 
