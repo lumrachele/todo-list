@@ -52,18 +52,27 @@ export default class Note extends React.Component {
               "borderLeftColor": '#e91e63'}}>
           {this.props.val.date}
           </Text>
+
           <Text style={{"paddingLeft":20,
               "borderLeftWidth": 10,
               "borderLeftColor": '#e91e63',
-              "backgroundColor":this.backgroundColor
+              // "backgroundColor":this.backgroundColor
             }}>
           {this.props.val.note}
           </Text>
 
+          <View style={{"flex": 1, "flexDirection": 'row'}}>
+
+          <TouchableOpacity onPress={this.props.prioritizeMethod} style={styles.notePrioritize}>
+          <Text style={styles.noteDeleteText}>!</Text>
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>
-            <Text style={styles.noteDeleteText}>delete</Text>
+          <Text style={styles.noteDeleteText}>delete</Text>
           </TouchableOpacity>
+        </View>
+
+
         </View>
       </GestureRecognizer>
     )
@@ -85,14 +94,26 @@ const styles = StyleSheet.create({
     // borderLeftColor: '#e91e63'
   },
   noteDelete:{
-    position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
+    // position: 'absolute',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#2980b9',
     padding: 10,
-    top: 10,
-    bottom: 10,
-    right: 10
+    // top: 10,
+    // bottom: 10,
+    // right: 10
+  },
+  notePrioritize:{
+    // position: 'absolute',
+    // justifyContent: 'center',
+    // alignItems: "center",
+    backgroundColor: 'red',
+    padding: 10,
+    // top: 10,
+    // bottom: 10,
+    // right: 10
+    height: 50,
+    width: 50,
   },
   noteDeleteText:{
     color: 'white'

@@ -58,7 +58,7 @@ export default class Main extends React.Component {
 
   render() {
     let notes = this.state.noteArray.map((val, key)=>{
-      return <Note key={key} keyval={key} val={val} deleteMethod={()=>this.deleteNote(key)} onPressMethod={()=>{this.onPress(key)}}/>
+      return <Note key={key} keyval={key} val={val} deleteMethod={()=>this.deleteNote(key)} prioritizeMethod={()=>{this.prioritize(key)}}/>
     })
     return (
 
@@ -119,8 +119,9 @@ export default class Main extends React.Component {
     this.state.noteArray.splice(key, 1)
     this.setState({noteArray: this.state.noteArray})
   }
-  onPress(key){
-    alert('you pressed me')
+  prioritize(key){
+    alert('you prioritized me')
+
   }
   //
   // adjustPadding(){
