@@ -18,36 +18,45 @@ export default class Note extends React.Component {
 
   onSwipe(gestureName) {
     const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-    // this.setState({gestureName: gestureName});
-    // switch (gestureName) {
-    //   case SWIPE_UP:
-    //     this.setState({backgroundColor: 'red'});
-    //     break;
-    //   case SWIPE_DOWN:
-    //     this.setState({backgroundColor: 'green'});
-    //     break;
-    //   case SWIPE_LEFT:
-    //     this.setState({backgroundColor: 'blue'});
-    //     break;
-    //   case SWIPE_RIGHT:
-    //     this.setState({backgroundColor: 'yellow'});
-    //     break;
-    // }
-    alert(`You swiped ${gestureName}`)
+    this.setState({gestureName: gestureName});
+    switch (gestureName) {
+      // case SWIPE_UP:
+      //   this.setState({backgroundColor: 'red'});
+      //   break;
+      // case SWIPE_DOWN:
+      //   this.setState({backgroundColor: 'green'});
+      //   break;
+      // case SWIPE_LEFT:
+      //   this.setState({backgroundColor: 'blue'});
+      //   break;
+      case SWIPE_RIGHT:
+        this.setState({isComplete: true});
+        break;
+    }
+    // alert(`You swiped ${gestureName}`)
   }
 
+  backgroundColor(){
+    this.state.isComplete ? "red":null
+  }
 
   render(){
     return(
       <GestureRecognizer
      onSwipe={(direction) => this.onSwipe(direction)}
-
      >
-        <View key={this.props.keyval} style={styles.note}>
-          <Text style={styles.noteText}>
+        <View key={this.props.keyval} style={styles.note}
+        >
+          <Text style={{"paddingLeft":20,
+              "borderLeftWidth": 10,
+              "borderLeftColor": '#e91e63'}}>
           {this.props.val.date}
           </Text>
-          <Text style={styles.noteText}>
+          <Text style={{"paddingLeft":20,
+              "borderLeftWidth": 10,
+              "borderLeftColor": '#e91e63',
+              "backgroundColor":this.backgroundColor
+            }}>
           {this.props.val.note}
           </Text>
 
@@ -71,9 +80,9 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red'
   },
   noteText: {
-    paddingLeft: 20,
-    borderLeftWidth: 10,
-    borderLeftColor: '#e91e63'
+    // paddingLeft: 20,
+    // borderLeftWidth: 10,
+    // borderLeftColor: '#e91e63'
   },
   noteDelete:{
     position: 'absolute',
